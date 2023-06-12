@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Neobis_Android_Chapter8</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registration">Регистрация</string>
+    <string name="create_password">Придумайте пароль</string>
+    <string name="content">Минимальная длина — 8 символов. Для надежности пароль должен содержать буквы и цифры.</string>
+    <string name="next">Далее</string>
+    <string name="passwords_are_not_same">Пароли не сопадают</string>
+    <string name="title">MOBI MARKET</string>
+    <string name="sign_in">Войти</string>
+    <string name="error_msg_card">Неверный логин или пароль</string>
 </resources>
