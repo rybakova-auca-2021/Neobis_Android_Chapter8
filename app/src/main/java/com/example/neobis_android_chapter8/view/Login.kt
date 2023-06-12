@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class Login : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private var isPasswordVisible = false
+    private var isPasswordVisible = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,9 +60,9 @@ class Login : Fragment() {
             binding.password.transformationMethod = transformationMethod
             binding.hidePassword.setImageResource(
                 if (isPasswordVisible)
-                    R.drawable.hide_password
-                else
                     R.drawable.show_password
+                else
+                    R.drawable.hide_password
             )
         }
     }
