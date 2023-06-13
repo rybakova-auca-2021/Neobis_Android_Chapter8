@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gothampro_medium"
-        android:text="Профиль"
+        android:text="@string/profile"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar2" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar2" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/user_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -57,12 +57,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/gothampro"
-        android:text="username"
+        android:text="@string/username"
         android:textColor="#494949"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/user_photo" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/liked"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:fontFamily="@font/gothampro_bold"
-                android:text="Понравившиеся"
+                android:text="@string/liked"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/view"
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gothampro_bold"
-                android:text="Мои товары"
+                android:text="@string/my_products"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/gothampro_bold"
-                android:text="Выйти"
+                android:text="@string/log_out"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -217,7 +217,7 @@
         android:layout_marginBottom="150dp"
         android:backgroundTint="@color/btn_valid"
         android:fontFamily="@font/gothampro_bold"
-        android:text="Закончить регистрацию"
+        android:text="@string/finish_registration"
         android:textAllCaps="false"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

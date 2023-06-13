@@ -10,4 +10,25 @@
     <string name="title">MOBI MARKET</string>
     <string name="sign_in">Войти</string>
     <string name="error_msg_card">Неверный логин или пароль</string>
+    <string name="profile">Профиль</string>
+    <string name="username">username</string>
+    <string name="liked">Понравившиеся</string>
+    <string name="my_products">Мои товары</string>
+    <string name="log_out">Выйти</string>
+    <string name="finish_registration">Закончить регистрацию</string>
+    <string name="choose_photo">Выбрать фотографию</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="user_name">Имя пользователя</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="add_phone_number">Добавить номер</string>
+    <string name="hint">0(000) 000 000</string>
+    <string name="mail">Электронная почта</string>
+    <string name="enter_phoneNumber">Введите номер телефона</string>
+    <string name="msg">Мы отправим вам СМС с кодом подтверждения</string>
+    <string name="error_msg_number">Данный номер уже зарегистрирован</string>
+    <string name="enter_code_sms">Введите код из СМС</string>
+    <string name="finish">Подтвердить</string>
+    <string name="error_msg_code">Неверный код</string>
+    <string name="send_code_again">Отправить код еще раз</string>
 </resources>

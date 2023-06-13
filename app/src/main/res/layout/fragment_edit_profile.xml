@@ -28,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/tb_edit_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/ready"
@@ -41,7 +42,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/tb_edit_profile"
         app:layout_constraintEnd_toEndOf="@+id/tb_edit_profile"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/user_photo"
@@ -63,7 +65,7 @@
         android:fontFamily="@font/gothampro"
         android:minHeight="48dp"
         android:textSize="18sp"
-        android:text="Выбрать фотографию"
+        android:text="@string/choose_photo"
         android:textColor="@color/btn_valid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:backgroundTint="@color/white"
-                android:hint="Имя"
+                android:hint="@string/name"
                 app:layout_constraintBottom_toTopOf="@+id/view_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:backgroundTint="@color/white"
-                android:hint="Фамилия"
+                android:hint="@string/surname"
                 app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -143,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:backgroundTint="@color/white"
-                android:hint="Имя пользователя"
+                android:hint="@string/user_name"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -171,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:backgroundTint="@color/white"
-                android:hint="Дата рождения"
+                android:hint="@string/birthday"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +220,7 @@
                 android:fontFamily="@font/gothampro_medium"
                 android:gravity="center_vertical"
                 android:minHeight="48dp"
-                android:text="Добавить номер"
+                android:text="@string/add_phone_number"
                 android:textColor="@color/btn_valid"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/view_number"
@@ -233,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/gothampro_medium"
-                android:text="0(000) 000 000"
+                android:text="@string/hint"
                 app:layout_constraintBottom_toTopOf="@+id/view_number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -244,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:backgroundTint="@color/white"
-                android:hint="Электронная почта"
+                android:hint="@string/mail"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
