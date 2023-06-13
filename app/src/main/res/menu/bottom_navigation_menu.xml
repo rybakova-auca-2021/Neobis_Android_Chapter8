@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item1"
+        android:title="Profile"
+        android:icon="@drawable/profile" />
+
+    <item
+        android:id="@+id/menu_item2"
+        android:title="Chats"
+        android:icon="@drawable/chat" />
+
+    <item
+        android:id="@+id/menu_item3"
+        android:title="add"
+        android:icon="@drawable/add_btn" />
+
+    <item
+        android:id="@+id/menu_item4"
+        android:title="Payment"
+        android:icon="@drawable/payment" />
+
+    <item
+        android:id="@+id/menu_item5"
+        android:title="Main"
+        android:icon="@drawable/main_page" />
+</menu>
