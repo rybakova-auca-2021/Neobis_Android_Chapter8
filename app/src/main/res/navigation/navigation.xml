@@ -50,5 +50,45 @@
         android:id="@+id/profileFragment"
         android:name="com.example.neobis_android_chapter8.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.neobis_android_chapter8.view.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_addNumberFragment"
+            app:destination="@id/addNumberFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNumberFragment"
+        android:name="com.example.neobis_android_chapter8.view.AddNumberFragment"
+        android:label="fragment_add_number"
+        tools:layout="@layout/fragment_add_number" >
+        <action
+            android:id="@+id/action_addNumberFragment_to_enterCodeFragment"
+            app:destination="@id/enterCodeFragment" />
+        <action
+            android:id="@+id/action_addNumberFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterCodeFragment"
+        android:name="com.example.neobis_android_chapter8.view.EnterCodeFragment"
+        android:label="fragment_enter_code"
+        tools:layout="@layout/fragment_enter_code" >
+        <action
+            android:id="@+id/action_enterCodeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_enterCodeFragment_to_addNumberFragment"
+            app:destination="@id/addNumberFragment" />
+    </fragment>
 </navigation>
