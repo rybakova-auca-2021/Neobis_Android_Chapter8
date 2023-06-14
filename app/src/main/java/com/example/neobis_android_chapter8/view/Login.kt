@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
+import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
 import com.example.neobis_android_chapter8.model.Login
@@ -19,9 +22,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class Login : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private var isPasswordVisible = true
+    private var isPasswordVisible = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +36,9 @@ class Login : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeButtonColor()
         setupNavigation()
         setupPasswordVisibilityToggle()
-        changeButtonColor()
     }
 
     private fun setupNavigation() {
@@ -43,6 +47,7 @@ class Login : Fragment() {
         }
         binding.buttonNext.setOnClickListener {
             val username = binding.username.text.toString()
+            Utils.username = username
             val password = binding.password.text.toString()
             if (username.isNotEmpty() && password.isNotEmpty()) {
                 login(username, password)
@@ -70,11 +75,14 @@ class Login : Fragment() {
     private fun changeButtonColor() {
         val username = binding.username.text.toString()
         val password = binding.password.text.toString()
-        if(password.isNotEmpty() && username.isNotEmpty()) {
-            binding.buttonNext.setBackgroundColor(R.color.btn_valid)
+        val validColor = ContextCompat.getColor(requireContext(), R.color.btn_valid)
+
+        if (password.isNotEmpty() && username.isNotEmpty()) {
+            binding.buttonNext.setBackgroundColor(validColor)
             binding.buttonNext.isClickable = true
         }
     }
+
     private fun login(username: String, password: String) {
         val request = Login(username, password)
         val apiInterface = RetrofitInstance.api
