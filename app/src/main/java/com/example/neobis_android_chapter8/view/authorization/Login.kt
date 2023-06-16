@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8.view
+package com.example.neobis_android_chapter8.view.authorization
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R

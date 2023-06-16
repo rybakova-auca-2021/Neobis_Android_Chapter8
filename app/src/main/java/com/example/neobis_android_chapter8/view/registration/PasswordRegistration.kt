@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8.view
+package com.example.neobis_android_chapter8.view.registration
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod

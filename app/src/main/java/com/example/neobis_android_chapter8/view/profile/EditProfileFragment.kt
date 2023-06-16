@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8.view
+package com.example.neobis_android_chapter8.view.profile
 
 import android.app.Activity
 import android.content.Intent

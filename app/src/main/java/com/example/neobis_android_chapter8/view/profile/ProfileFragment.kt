@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8.view
+package com.example.neobis_android_chapter8.view.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
