@@ -31,4 +31,11 @@
     <string name="finish">Подтвердить</string>
     <string name="error_msg_code">Неверный код</string>
     <string name="send_code_again">Отправить код еще раз</string>
+    <string name="my_product">Мои товары</string>
+    <string name="empty">Ой пусто!</string>
+    <string name="price">Price</string>
+    <string name="like">Нравится: 1М</string>
+    <string name="title_productDetail">Title</string>
+    <string name="description">Description</string>
+    <string name="detail_description">Детальное описание</string>
 </resources>
