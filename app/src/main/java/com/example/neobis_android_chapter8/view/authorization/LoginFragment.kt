@@ -16,13 +16,14 @@ import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
 import com.example.neobis_android_chapter8.model.Login
+import com.example.neobis_android_chapter8.model.LoginResponse
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
-class Login : Fragment() {
+class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var isPasswordVisible = false
 
@@ -87,12 +88,20 @@ class Login : Fragment() {
         val apiInterface = RetrofitInstance.api
 
         val call = apiInterface.login(request)
-        call.enqueue(object : Callback<Unit> {
+        call.enqueue(object : Callback<LoginResponse>{
             override fun onResponse(
-                call: Call<Unit>,
-                response: Response<Unit>
+                call: Call<LoginResponse>,
+                response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    val accessToken = loginResponse?.access
+                    val refreshToken = loginResponse?.refresh
+                    if (refreshToken != null) {
+                        if (accessToken != null) {
+                            Utils.access_token = accessToken
+                        }
+                    }
                     findNavController().navigate(R.id.action_login_to_profileFragment)
                 } else {
                     showSnackbar("Пользователь не найден, попробуйте ввести данные еще раз")
@@ -100,7 +109,7 @@ class Login : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Unit>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "Повторите попытку", Toast.LENGTH_SHORT)
                     .show()
             }

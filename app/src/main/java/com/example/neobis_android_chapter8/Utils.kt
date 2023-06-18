@@ -9,4 +9,5 @@ object Utils {
     var birthday = ""
     var phoneNumber = ""
     var selectedImageUri: Uri? = null
+    var access_token = ""
 }

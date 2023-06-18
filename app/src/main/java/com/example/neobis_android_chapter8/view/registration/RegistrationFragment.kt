@@ -12,7 +12,7 @@ import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentRegistrationBinding
 
-class Registration : Fragment() {
+class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
 
     override fun onCreateView(

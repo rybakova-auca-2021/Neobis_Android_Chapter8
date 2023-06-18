@@ -79,37 +79,40 @@
 
     <com.chaos.view.PinView
         android:id="@+id/et_phone"
+        style="@style/PinWidget.PinView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:fontFamily="@font/gothampro_medium"
-        android:gravity="center_horizontal"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:cursorVisible="true"
+        android:gravity="center"
+        android:inputType="text"
+        android:itemBackground="@color/white"
         app:hideLineWhenFilled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_number"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:itemCount="4"
+        app:itemHeight="50dp"
+        app:itemRadius="10dp"
+        app:itemWidth="50dp"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_number" />
 
     <TextView
         android:id="@+id/send_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/gothampro_medium"
         android:minHeight="48dp"
         android:text="@string/send_code_again"
         android:textColor="@color/btn_valid"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/error_msg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone"
-        android:textSize="20sp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
