@@ -91,4 +91,9 @@
             android:id="@+id/action_enterCodeFragment_to_addNumberFragment"
             app:destination="@id/addNumberFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.MainPageFragment"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" />
 </navigation>

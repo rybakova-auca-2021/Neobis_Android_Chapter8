@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentEnterCodeBinding
@@ -30,6 +31,7 @@ class EnterCodeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as HomeActivity).show()
         setupNavigation()
     }
 

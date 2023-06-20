@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.api.RetrofitInstance
@@ -36,6 +37,7 @@ class LoginFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as HomeActivity).hide()
         changeButtonColor()
         setupNavigation()
         setupPasswordVisibilityToggle()

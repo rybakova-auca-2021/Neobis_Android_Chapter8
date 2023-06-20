@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
@@ -30,6 +31,7 @@ class EditProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as HomeActivity).hide()
         setData()
         setupNavigation()
         setupListeners()
