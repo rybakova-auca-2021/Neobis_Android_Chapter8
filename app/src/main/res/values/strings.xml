@@ -22,7 +22,7 @@
     <string name="user_name">Имя пользователя</string>
     <string name="birthday">Дата рождения</string>
     <string name="add_phone_number">Добавить номер</string>
-    <string name="hint">0(000) 000 000</string>
+    <string name="hint">+996 (000) 000 000</string>
     <string name="mail">Электронная почта</string>
     <string name="enter_phoneNumber">Введите номер телефона</string>
     <string name="msg">Мы отправим вам СМС с кодом подтверждения</string>
