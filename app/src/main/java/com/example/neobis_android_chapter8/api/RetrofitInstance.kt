@@ -1,6 +1,6 @@
 package com.example.neobis_android_chapter8.api
 
-import com.example.neobis_android_chapter8.Utils
+import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.utils.Constants.Companion.BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

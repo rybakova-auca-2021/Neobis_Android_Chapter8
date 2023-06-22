@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.Utils
+import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment() {

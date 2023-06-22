@@ -2,15 +2,15 @@ package com.example.neobis_android_chapter8.view.registration
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentRegistrationBinding
+import com.example.neobis_android_chapter8.utils.Utils
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding

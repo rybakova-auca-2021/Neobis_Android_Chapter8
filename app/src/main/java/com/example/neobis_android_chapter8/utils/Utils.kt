@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8
+package com.example.neobis_android_chapter8.utils
 import android.net.Uri
 
 object Utils {

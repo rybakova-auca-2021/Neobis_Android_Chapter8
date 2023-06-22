@@ -1,5 +1,6 @@
 package com.example.neobis_android_chapter8.view.authorization
 
+import LoginViewModel
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -10,10 +11,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.Utils
+import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
 import com.example.neobis_android_chapter8.model.Login
@@ -23,14 +25,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var isPasswordVisible = false
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,7 +54,7 @@ class LoginFragment : Fragment() {
             Utils.username = username
             val password = binding.password.text.toString()
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                login(username, password)
+                loginViewModel.login(this, username, password)
             }
         }
     }
@@ -83,45 +85,5 @@ class LoginFragment : Fragment() {
             binding.buttonNext.setBackgroundColor(validColor)
             binding.buttonNext.isClickable = true
         }
-    }
-
-    private fun login(username: String, password: String) {
-        val request = Login(username, password)
-        val apiInterface = RetrofitInstance.api
-
-        val call = apiInterface.login(request)
-        call.enqueue(object : Callback<LoginResponse>{
-            override fun onResponse(
-                call: Call<LoginResponse>,
-                response: Response<LoginResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    val accessToken = loginResponse?.access
-                    val refreshToken = loginResponse?.refresh
-                    if (refreshToken != null) {
-                        if (accessToken != null) {
-                            Utils.access_token = accessToken
-                        }
-                    }
-                    findNavController().navigate(R.id.action_login_to_profileFragment)
-                } else {
-                    showSnackbar("Пользователь не найден, попробуйте ввести данные еще раз")
-                    clearFields()
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "Повторите попытку", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-    }
-    private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-    }
-    private fun clearFields() {
-        binding.username.text = null
-        binding.password.text = null
     }
 }
