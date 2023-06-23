@@ -1,3 +1,5 @@
+package com.example.neobis_android_chapter8.viewModels.AuthViewModel
+
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -6,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentEnterCodeBinding
-import com.example.neobis_android_chapter8.model.Confirm
+import com.example.neobis_android_chapter8.model.AuthModel.Confirm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +18,7 @@ class EnterCodeViewModel : ViewModel() {
 
     fun enterCode(fragment: Fragment, code: String) {
         val request = Confirm(code)
-        val apiInterface = RetrofitInstance.api
+        val apiInterface = RetrofitInstance.authApi
 
         val call = apiInterface.confirm(request)
         call.enqueue(object : Callback<Unit> {

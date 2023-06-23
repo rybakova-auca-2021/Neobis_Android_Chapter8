@@ -1,11 +1,13 @@
+package com.example.neobis_android_chapter8.viewModels.AuthViewModel
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
-import com.example.neobis_android_chapter8.model.Login
-import com.example.neobis_android_chapter8.model.LoginResponse
+import com.example.neobis_android_chapter8.model.AuthModel.Login
+import com.example.neobis_android_chapter8.model.AuthModel.LoginResponse
 import com.example.neobis_android_chapter8.utils.Utils
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -17,7 +19,7 @@ class LoginViewModel : ViewModel() {
 
     fun login(fragment: Fragment, username: String, password: String) {
         val request = Login(username, password)
-        val apiInterface = RetrofitInstance.api
+        val apiInterface = RetrofitInstance.authApi
 
         val call = apiInterface.login(request)
         call.enqueue(object : Callback<LoginResponse> {

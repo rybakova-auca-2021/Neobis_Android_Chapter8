@@ -1,3 +1,5 @@
+package com.example.neobis_android_chapter8.viewModels.AuthViewModel
+
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -5,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
-import com.example.neobis_android_chapter8.model.Register
+import com.example.neobis_android_chapter8.model.AuthModel.Register
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +18,7 @@ class RegistrationViewModel : ViewModel() {
 
     fun register(fragment: Fragment, username: String, email: String, password: String, password_repeat: String) {
         val request = Register(username, email, password, password_repeat)
-        val apiInterface = RetrofitInstance.api
+        val apiInterface = RetrofitInstance.authApi
 
         val call = apiInterface.register(request)
         call.enqueue(object : Callback<Unit> {

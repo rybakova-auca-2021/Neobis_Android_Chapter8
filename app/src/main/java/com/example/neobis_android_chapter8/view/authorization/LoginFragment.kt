@@ -1,6 +1,6 @@
 package com.example.neobis_android_chapter8.view.authorization
 
-import LoginViewModel
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.LoginViewModel
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -8,7 +8,6 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,14 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.utils.Utils
-import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
-import com.example.neobis_android_chapter8.model.Login
-import com.example.neobis_android_chapter8.model.LoginResponse
-import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding

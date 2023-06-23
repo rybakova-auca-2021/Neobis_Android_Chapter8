@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter8.viewModels
+package com.example.neobis_android_chapter8.viewModels.AuthViewModel
 
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -8,8 +8,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.databinding.FragmentAddNumberBinding
-import com.example.neobis_android_chapter8.model.FullRegister
-import com.example.neobis_android_chapter8.model.RegisterResponseModel
+import com.example.neobis_android_chapter8.model.AuthModel.FullRegister
+import com.example.neobis_android_chapter8.model.AuthModel.RegisterResponseModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ class NumberRegistrationViewModel : ViewModel() {
 
     fun fullRegister(fragment: Fragment, last_name: String, birthday: String, phone_number: String) {
         val request = FullRegister(last_name, birthday, phone_number)
-        val apiInterface = RetrofitInstance.api
+        val apiInterface = RetrofitInstance.authApi
 
         val call = apiInterface.registerUser(request)
         call.enqueue(object : Callback<RegisterResponseModel> {

@@ -1,6 +1,6 @@
 package com.example.neobis_android_chapter8.view.registration
 
-import EnterCodeViewModel
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.EnterCodeViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

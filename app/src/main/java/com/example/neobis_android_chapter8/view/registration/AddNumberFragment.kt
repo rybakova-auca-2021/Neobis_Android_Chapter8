@@ -13,7 +13,7 @@ import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentAddNumberBinding
 import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.view.PhoneNumberMaskWatcher
-import com.example.neobis_android_chapter8.viewModels.NumberRegistrationViewModel
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.NumberRegistrationViewModel
 
 class AddNumberFragment : Fragment() {
     private lateinit var binding: FragmentAddNumberBinding

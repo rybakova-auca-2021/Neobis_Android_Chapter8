@@ -1,6 +1,6 @@
 package com.example.neobis_android_chapter8.view.registration
 
-import RegistrationViewModel
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.RegistrationViewModel
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
