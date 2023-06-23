@@ -5,6 +5,7 @@ import com.example.neobis_android_chapter8.model.AuthModel.*
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthInterface {
@@ -18,4 +19,6 @@ interface AuthInterface {
     fun registerUser(@Body request: FullRegister): Call<RegisterResponseModel>
     @POST("login/")
     fun login(@Body request: Login): Call<LoginResponse>
+    @GET("profile/")
+    fun getProfile(): Call<Profile>
 }

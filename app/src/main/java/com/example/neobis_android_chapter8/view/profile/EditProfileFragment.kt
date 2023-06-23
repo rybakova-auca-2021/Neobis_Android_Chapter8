@@ -14,6 +14,7 @@ import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
+import com.example.neobis_android_chapter8.utils.ProfileInfo
 
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
@@ -32,7 +33,7 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as HomeActivity).hide()
-        setData()
+        setProfileInfo()
         setupNavigation()
         setupListeners()
     }
@@ -79,15 +80,14 @@ class EditProfileFragment : Fragment() {
             }
         }
     }
-
-    private fun setData() {
-        binding.name.setText(Utils.name)
-        binding.surname.setText(Utils.surname)
-        binding.etUsername.setText(Utils.username)
-        binding.birthday.setText(Utils.birthday)
-        binding.etMail.setText(Utils.email)
-        binding.phoneNumber.text = Utils.phoneNumber
-        binding.userPhoto.setImageURI(Utils.selectedImageUri)
+    private fun setProfileInfo() {
+        binding.name.setText(ProfileInfo.name)
+        binding.surname.setText(ProfileInfo.surname)
+        binding.etUsername.setText(ProfileInfo.username)
+        binding.birthday.setText(ProfileInfo.birthday)
+        binding.etMail.setText(ProfileInfo.email)
+        binding.phoneNumber.text = ProfileInfo.phoneNumber
+        binding.userPhoto.setImageURI(ProfileInfo.selectedImageUri)
     }
 
     private fun saveData() {

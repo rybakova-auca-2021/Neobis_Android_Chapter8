@@ -1,19 +1,23 @@
 package com.example.neobis_android_chapter8.view.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentProfileBinding
+import com.example.neobis_android_chapter8.utils.ProfileInfo
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private val profileViewModel: ProfileViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -25,8 +29,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as HomeActivity).show()
-        setData()
+        profileViewModel.getInfo(this)
         setupNavigation()
+        setData()
     }
 
     private fun setupNavigation() {
@@ -36,13 +41,18 @@ class ProfileFragment : Fragment() {
         binding.buttonNext.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
-        // TODO - navigation to products and liked page
+        binding.likedText.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_likedProductsFragment)
+        }
+        binding.productsText.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_myProductsFragment)
+        }
     }
 
     private fun setData() {
-        val username = Utils.username
+        val username = ProfileInfo.username
         binding.name.text = username
-        Utils.selectedImageUri?.let { imageUri ->
+        ProfileInfo.selectedImageUri?.let { imageUri ->
             Glide.with(this).load(imageUri).into(binding.userPhoto)
         }
     }
