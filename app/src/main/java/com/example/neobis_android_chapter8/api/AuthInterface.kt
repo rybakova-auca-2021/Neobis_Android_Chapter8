@@ -9,16 +9,16 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthInterface {
-    @POST("register/")
+    @POST("account/register/")
     fun register(@Body request: Register): Call<Unit>
 
-    @POST("confirm/")
+    @POST("account/confirm/")
     fun confirm(@Body request: Confirm): Call<Unit>
 
-    @POST("full_register/")
+    @POST("account/full_register/")
     fun registerUser(@Body request: FullRegister): Call<RegisterResponseModel>
-    @POST("login/")
+    @POST("account/login/")
     fun login(@Body request: Login): Call<LoginResponse>
-    @GET("profile/")
+    @GET("account/profile/")
     fun getProfile(): Call<Profile>
 }

@@ -51,7 +51,7 @@ class RetrofitInstance {
 
         private fun requiresAuthorization(request: okhttp3.Request): Boolean {
             return request.url.toString().endsWith("full_register/") || request.url.toString().endsWith("confirm/")
-                    || request.url.toString().endsWith("profile/")
+                    || request.url.toString().endsWith("profile/") || request.url.toString().endsWith("product/")
         }
     }
 }
