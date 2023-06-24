@@ -54,6 +54,18 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_likedProductsFragment"
+            app:destination="@id/likedProductsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myProductsFragment"
+            app:destination="@id/myProductsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_likedProductsFragment2"
+            app:destination="@id/likedProductsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myProductsFragment2"
+            app:destination="@id/myProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -96,4 +108,36 @@
         android:name="com.example.neobis_android_chapter8.view.products.MainPageFragment"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likedProductsFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.LikedProductsFragment"
+        android:label="fragment_liked_products"
+        tools:layout="@layout/fragment_liked_products" >
+        <action
+            android:id="@+id/action_likedProductsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProductsFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.MyProductsFragment"
+        android:label="fragment_my_products"
+        tools:layout="@layout/fragment_my_products" >
+        <action
+            android:id="@+id/action_myProductsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
 </navigation>

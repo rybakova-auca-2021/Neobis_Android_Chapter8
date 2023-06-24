@@ -35,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
                     navController.navigate(R.id.profileFragment)
                     true
                 }
+                R.id.menu_item3 -> {
+                    navController.navigate(R.id.addProductFragment)
+                    true
+                }
                 R.id.menu_item5 -> {
                     navController.navigate(R.id.mainPageFragment)
                     true
