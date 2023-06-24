@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
             Utils.username = username
             val password = binding.password.text.toString()
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.login(this, username, password)
+                loginViewModel.login(this, binding, username, password)
             }
         }
     }

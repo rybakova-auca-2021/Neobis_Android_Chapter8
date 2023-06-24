@@ -15,10 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NumberRegistrationViewModel : ViewModel() {
-    private lateinit var binding: FragmentAddNumberBinding
 
-    fun fullRegister(fragment: Fragment, last_name: String, birthday: String, phone_number: String) {
-        val request = FullRegister(last_name, birthday, phone_number)
+    fun fullRegister(fragment: Fragment, binding: FragmentAddNumberBinding, first_name: String, last_name: String, birthday: String, phone_number: String) {
+        val request = FullRegister(first_name, last_name, birthday, phone_number)
         val apiInterface = RetrofitInstance.authApi
 
         val call = apiInterface.registerUser(request)
@@ -32,7 +31,7 @@ class NumberRegistrationViewModel : ViewModel() {
                     fragment.findNavController().navigate(R.id.action_addNumberFragment_to_enterCodeFragment)
                 } else {
                     binding.errorMsg.isVisible = true
-                    clearFields()
+                    clearFields(binding)
                 }
             }
 
@@ -41,7 +40,7 @@ class NumberRegistrationViewModel : ViewModel() {
             }
         })
     }
-    private fun clearFields() {
+    private fun clearFields(binding: FragmentAddNumberBinding) {
         binding.etPhone.text = null
     }
 }

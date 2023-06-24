@@ -43,7 +43,7 @@ class AddNumberFragment : Fragment() {
         binding.buttonNext.setOnClickListener {
             val phoneNumber = binding.etPhone.text.toString()
             saveData(phoneNumber)
-            fullRegisterViewModel.fullRegister(this, Utils.surname, Utils.birthday, phoneNumber)
+            fullRegisterViewModel.fullRegister(this, binding, Utils.name, Utils.surname, Utils.birthday, phoneNumber)
         }
         binding.buttonBack.setOnClickListener {
             findNavController().navigate(R.id.action_addNumberFragment_to_editProfileFragment)

@@ -43,13 +43,13 @@ class EditProfileFragment : Fragment() {
             navigateToProfileFragment()
         }
         binding.ready.setOnClickListener {
-            saveData()
             navigateToProfileFragment()
         }
         binding.addPhoto.setOnClickListener {
             choosePhoto()
         }
         binding.addNumber.setOnClickListener {
+            saveData()
             navigateToPhoneNumberConfirmation()
         }
     }

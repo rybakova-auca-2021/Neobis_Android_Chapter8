@@ -15,9 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
-    private lateinit var binding: FragmentLoginBinding
 
-    fun login(fragment: Fragment, username: String, password: String) {
+    fun login(fragment: Fragment, binding: FragmentLoginBinding, username: String, password: String) {
         val request = Login(username, password)
         val apiInterface = RetrofitInstance.authApi
 
@@ -33,22 +32,22 @@ class LoginViewModel : ViewModel() {
                     }
                     fragment.findNavController().navigate(R.id.action_login_to_profileFragment)
                 } else {
-                    showSnackbar("Пользователь не найден, попробуйте ввести данные еще раз")
-                    clearFields()
+                    showSnackbar(binding,"Пользователь не найден, попробуйте ввести данные еще раз")
+                    clearFields(binding)
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                showSnackbar("Повторите попытку")
+                showSnackbar(binding,"Повторите попытку")
             }
         })
     }
 
-    private fun showSnackbar(message: String) {
+    private fun showSnackbar(binding: FragmentLoginBinding, message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun clearFields() {
+    private fun clearFields(binding: FragmentLoginBinding) {
         binding.username.text = null
         binding.password.text = null
     }
