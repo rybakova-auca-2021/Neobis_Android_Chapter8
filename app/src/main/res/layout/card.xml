@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="160dp"
-    android:layout_height="170dp"
+    android:layout_height="220dp"
     android:layout_marginStart="16dp"
     android:layout_marginTop="16dp"
-    app:cardElevation="20dp"
+    android:background="@drawable/card"
     app:cardCornerRadius="20dp"
-    android:background="@drawable/card">
+    app:cardElevation="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             android:id="@+id/image_holder"
             android:layout_width="140dp"
             android:layout_height="80dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +63,7 @@
             android:id="@+id/likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="5dp"
             android:text="100"
             android:textColor="#C1C1C1"
@@ -76,18 +75,21 @@
 
         <ImageView
             android:id="@+id/threeDots"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="5dp"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="@+id/likes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/likes"
-            app:srcCompat="@drawable/dots_three_vertical" />
+            app:srcCompat="@drawable/dots_three_vertical"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
             app:layout_constraintEnd_toStartOf="@+id/likes"
             app:layout_constraintStart_toStartOf="parent"

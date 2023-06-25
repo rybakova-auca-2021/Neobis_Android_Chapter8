@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rectangle"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="28dp"
-            android:layout_marginEnd="206dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/gothampro_medium"
@@ -40,7 +40,7 @@
             android:text="Изменить"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/rectangle" />
 
         <TextView
@@ -64,9 +64,9 @@
             android:id="@+id/imageView2"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="15dp"
             android:layout_toStartOf="@+id/changeButton"
             app:layout_constraintBottom_toBottomOf="@+id/changeButton"
-            app:layout_constraintEnd_toStartOf="@+id/changeButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/changeButton"
             app:srcCompat="@drawable/change_btn_img" />
