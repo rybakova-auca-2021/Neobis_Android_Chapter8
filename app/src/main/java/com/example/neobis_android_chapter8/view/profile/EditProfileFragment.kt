@@ -4,21 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
 import com.example.neobis_android_chapter8.utils.ProfileInfo
+import com.example.neobis_android_chapter8.utils.Utils
 
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
-    private var isDataChanged = false
     private var PICK_IMAGE_REQUEST  = 1
     private var selectedImageUri: Uri? = null
 
@@ -35,7 +34,6 @@ class EditProfileFragment : Fragment() {
         (requireActivity() as HomeActivity).hide()
         setProfileInfo()
         setupNavigation()
-        setupListeners()
     }
 
     private fun setupNavigation() {
@@ -43,6 +41,7 @@ class EditProfileFragment : Fragment() {
             navigateToProfileFragment()
         }
         binding.ready.setOnClickListener {
+            saveData()
             navigateToProfileFragment()
         }
         binding.addPhoto.setOnClickListener {
@@ -51,33 +50,6 @@ class EditProfileFragment : Fragment() {
         binding.addNumber.setOnClickListener {
             saveData()
             navigateToPhoneNumberConfirmation()
-        }
-    }
-
-    private fun setupListeners() {
-        binding.name.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                isDataChanged = true
-                showSaveButton()
-            }
-        }
-        binding.surname.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                isDataChanged = true
-                showSaveButton()
-            }
-        }
-        binding.etUsername.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                isDataChanged = true
-                showSaveButton()
-            }
-        }
-        binding.birthday.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                isDataChanged = true
-                showSaveButton()
-            }
         }
     }
     private fun setProfileInfo() {
@@ -97,7 +69,6 @@ class EditProfileFragment : Fragment() {
         Utils.birthday = binding.birthday.text.toString()
         Utils.email = binding.etMail.text.toString()
         Utils.phoneNumber = binding.phoneNumber.text.toString()
-        Utils.selectedImageUri = selectedImageUri
     }
 
     private fun choosePhoto() {
@@ -111,6 +82,8 @@ class EditProfileFragment : Fragment() {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             selectedImageUri = data.data
+            Utils.selectedImageUri = selectedImageUri
+            println(Utils.selectedImageUri)
             Glide.with(this).load(selectedImageUri).into(binding.userPhoto)
         }
     }
@@ -122,7 +95,4 @@ class EditProfileFragment : Fragment() {
         findNavController().navigate(R.id.action_editProfileFragment_to_addNumberFragment)
     }
 
-    private fun showSaveButton() {
-        binding.ready.visibility = View.VISIBLE
-    }
 }
