@@ -12,6 +12,7 @@ import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentProfileBinding
 import com.example.neobis_android_chapter8.utils.ProfileInfo
+import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.viewModels.AuthViewModel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
@@ -50,7 +51,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setData() {
-        val username = ProfileInfo.username
+        val username = Utils.username
         binding.name.text = username
         ProfileInfo.selectedImageUri?.let { imageUri ->
             Glide.with(this).load(imageUri).into(binding.userPhoto)

@@ -1,12 +1,12 @@
 package com.example.neobis_android_chapter8.view.registration
 
-import com.example.neobis_android_chapter8.viewModels.AuthViewModel.RegistrationViewModel
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentPasswordRegistrationBinding
-import com.example.neobis_android_chapter8.utils.Utils
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.RegistrationViewModel
 
 class PasswordRegistration : Fragment() {
     private lateinit var binding: FragmentPasswordRegistrationBinding
-    private val registerViewModel: RegistrationViewModel by viewModels()
+    private val viewModel: RegistrationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,23 +39,35 @@ class PasswordRegistration : Fragment() {
 
     private fun setupNavigation() {
         binding.buttonNext.setOnClickListener {
-            val username = Utils.username
-            val email = Utils.email
-            val password = binding.createPasswordEt.text?.toString() ?: ""
-            val passwordRepeat = binding.repeatPasswordEt.text?.toString() ?: ""
-            if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordRepeat.isNotEmpty()) {
-                registerViewModel.register(this, username, email, password, passwordRepeat)
-            }
+            setupRegistration()
         }
         binding.buttonBack.setOnClickListener {
             findNavController().navigate(R.id.action_passwordRegistration_to_registration)
         }
     }
+
     private fun setupClickListeners() {
         binding.hidePassword.setOnClickListener {
             togglePasswordVisibilityCreate()
         }
     }
+
+    private fun setupRegistration() {
+        val password = binding.createPasswordEt.text?.toString() ?: ""
+        val passwordRepeat = binding.repeatPasswordEt.text?.toString() ?: ""
+        if (password.isNotEmpty() && passwordRepeat.isNotEmpty()) {
+            viewModel.register(password, passwordRepeat,
+                onSuccess = {
+                    findNavController().navigate(R.id.action_passwordRegistration_to_profileFragment)
+                    Toast.makeText(requireContext(), "Регистрация прошла успешно", Toast.LENGTH_SHORT).show()
+                },
+                onError = {
+                    Toast.makeText(requireContext(), "Попробуйте еще раз", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+    }
+
     private fun setupPasswordValidation() {
         binding.createPasswordEt.addTextChangedListener {
             val password = it.toString()
@@ -80,6 +92,7 @@ class PasswordRegistration : Fragment() {
             binding.repeatPasswordEt.isVisible = createPassword.isNotEmpty()
         }
     }
+
     private fun togglePasswordVisibilityCreate() {
         val isPasswordVisible = binding.createPasswordEt.transformationMethod == HideReturnsTransformationMethod.getInstance()
         val newTransformationMethod = if (isPasswordVisible) PasswordTransformationMethod.getInstance() else HideReturnsTransformationMethod.getInstance()

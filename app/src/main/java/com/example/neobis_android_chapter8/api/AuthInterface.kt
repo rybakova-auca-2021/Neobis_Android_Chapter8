@@ -25,7 +25,7 @@ interface AuthInterface {
                      @Part("last_name") lastName: RequestBody,
                      @Part("birthday") birthday: RequestBody,
                      @Part("phone_number") phoneNumber: RequestBody,
-                     @Part image: MultipartBody.Part): Call<RegisterResponseModel>
+                     @Part photo: MultipartBody.Part): Call<RegisterResponseModel>
 
     @POST("account/login/")
     fun login(@Body request: Login): Call<LoginResponse>

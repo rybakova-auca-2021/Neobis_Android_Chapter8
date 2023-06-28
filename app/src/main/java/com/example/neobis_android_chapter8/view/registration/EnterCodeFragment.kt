@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,7 @@ import com.example.neobis_android_chapter8.databinding.FragmentEnterCodeBinding
 
 class EnterCodeFragment : Fragment() {
     private lateinit var binding: FragmentEnterCodeBinding
-    val enterCodeViewModel: EnterCodeViewModel by viewModels()
+    val viewModel: EnterCodeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,16 @@ class EnterCodeFragment : Fragment() {
         }
         binding.buttonNext.setOnClickListener {
             val code = binding.etPhone.text.toString()
-            enterCodeViewModel.enterCode(this, code)
+            viewModel.enterCode(
+                code,
+                onSuccess = {
+                    Toast.makeText(requireContext(), "Подтверждение прошло успешно", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_enterCodeFragment_to_profileFragment)
+                },
+                onError = {
+                    Toast.makeText(requireContext(), "Неверный код. Попробуйте еще раз", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 }

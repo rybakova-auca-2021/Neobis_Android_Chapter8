@@ -1,7 +1,7 @@
 package com.example.neobis_android_chapter8.view.authorization
 
-import com.example.neobis_android_chapter8.viewModels.AuthViewModel.LoginViewModel
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -14,13 +14,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.databinding.FragmentLoginBinding
+import com.example.neobis_android_chapter8.utils.Utils
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.LoginViewModel
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var isPasswordVisible = false
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +44,18 @@ class LoginFragment : Fragment() {
         }
         binding.buttonNext.setOnClickListener {
             val username = binding.username.text.toString()
-            Utils.username = username
             val password = binding.password.text.toString()
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.login(this, binding, username, password)
-            }
+
+            viewModel.login(username, password,
+                onSuccess = {
+                    findNavController().navigate(R.id.action_login_to_profileFragment)
+                    Utils.username = username
+                },
+                onError = { errorMessage ->
+                    showErrorDialog()
+                    clearFields()
+                }
+            )
         }
     }
     private fun setupPasswordVisibilityToggle() {
@@ -77,5 +85,18 @@ class LoginFragment : Fragment() {
             binding.buttonNext.setBackgroundColor(validColor)
             binding.buttonNext.isClickable = true
         }
+    }
+
+    private fun showErrorDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.error_message, null)
+
+        val dialog = AlertDialog.Builder(requireContext(),  R.style.LightDialogTheme).setView(dialogView).create()
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
+    private fun clearFields() {
+        binding.username.text = null
+        binding.password.text = null
     }
 }

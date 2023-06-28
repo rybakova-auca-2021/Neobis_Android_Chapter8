@@ -53,6 +53,7 @@ class RetrofitInstance {
             return request.url.toString().endsWith("full_register/") || request.url.toString().endsWith("confirm/")
                     || request.url.toString().endsWith("profile/") || request.url.toString().endsWith("product/")
                     || request.url.toString().endsWith("product/my/")
+                    || request.url.toString().endsWith("product/{id}/")
         }
     }
 }

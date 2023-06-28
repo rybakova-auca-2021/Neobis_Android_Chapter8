@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainPageViewModel : ViewModel() {
-     fun fetchProductList(adapter: RecyclerViewAdapter, fragment: Fragment) {
+     fun fetchProductList(onSuccess: (List<Product>) -> Unit, onError: () -> Unit) {
         val apiInterface = RetrofitInstance.productApi
 
         val call = apiInterface.productList()
@@ -20,15 +20,15 @@ class MainPageViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val productList = response.body()
                     productList?.let {
-                        adapter.updateProduct(it)
+                        onSuccess.invoke(it)
                     }
                 } else {
-                    Toast.makeText(fragment.requireContext(), "Не удалось загрузить товары", Toast.LENGTH_SHORT).show()
+                    onError.invoke()
                 }
             }
 
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                Toast.makeText(fragment.requireContext(), "Повторите попытку", Toast.LENGTH_SHORT).show()
+                onError.invoke()
             }
         })
     }

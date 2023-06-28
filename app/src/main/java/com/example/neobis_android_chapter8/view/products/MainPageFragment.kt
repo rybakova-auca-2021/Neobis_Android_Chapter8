@@ -40,7 +40,10 @@ class MainPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as HomeActivity).show()
         setupRV()
-        mainPageViewModel.fetchProductList(adapter, this)
+        mainPageViewModel.fetchProductList(
+            onSuccess = {adapter.updateProduct(it)},
+            onError = {Toast.makeText(requireContext(), "Не удалось загрузить товары", Toast.LENGTH_SHORT).show() }
+        )
     }
 
     private fun setupRV() {

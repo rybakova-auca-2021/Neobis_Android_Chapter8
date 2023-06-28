@@ -48,12 +48,10 @@ class ProfileViewModel : ViewModel() {
                         ProfileInfo.birthday = birthday
                     }
                 } else {
-                    Toast.makeText(fragment.requireContext(), "Попробуйте еще раз", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Profile>, t: Throwable) {
-                Toast.makeText(fragment.requireContext(), "Повторите попытку", Toast.LENGTH_SHORT).show()
             }
         })
     }
