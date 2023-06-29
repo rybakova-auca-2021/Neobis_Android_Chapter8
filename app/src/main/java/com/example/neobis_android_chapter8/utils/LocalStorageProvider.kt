@@ -3,6 +3,7 @@ package com.example.neobis_android_chapter8.utils
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.provider.MediaStore
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -11,7 +12,21 @@ import java.io.InputStream
 object LocalStorageProvider {
     fun getFile(context: Context, uri: Uri): File? {
         val contentResolver: ContentResolver = context.contentResolver
-        val file = createTempFile(context)
+        var fileName: String? = null
+
+        val projection = arrayOf(MediaStore.MediaColumns.DISPLAY_NAME)
+        contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
+                fileName = cursor.getString(columnIndex)
+            }
+        }
+
+        if (fileName.isNullOrEmpty()) {
+            fileName = "temp_image.jpg"
+        }
+
+        val file = File(context.filesDir, fileName)
         try {
             val inputStream: InputStream? = contentResolver.openInputStream(uri)
             if (inputStream != null) {
@@ -30,10 +45,5 @@ object LocalStorageProvider {
             e.printStackTrace()
         }
         return null
-    }
-
-    private fun createTempFile(context: Context): File {
-        val storageDir: File? = context.getExternalFilesDir(null)
-        return File.createTempFile("temp_image", ".jpg", storageDir)
     }
 }

@@ -8,18 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
-import com.example.neobis_android_chapter8.utils.ProfileInfo
 import com.example.neobis_android_chapter8.utils.Utils
+import com.example.neobis_android_chapter8.viewModels.AuthViewModel.ProfileViewModel
 
 class EditProfileFragment : Fragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private var PICK_IMAGE_REQUEST  = 1
     private var selectedImageUri: Uri? = null
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +34,9 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as HomeActivity).hide()
-        setProfileInfo()
         setupNavigation()
+        setProfileInfo()
+        viewModel.getInfo()
     }
 
     private fun setupNavigation() {
@@ -53,13 +56,19 @@ class EditProfileFragment : Fragment() {
         }
     }
     private fun setProfileInfo() {
-        binding.name.setText(ProfileInfo.name)
-        binding.surname.setText(ProfileInfo.surname)
-        binding.etUsername.setText(ProfileInfo.username)
-        binding.birthday.setText(ProfileInfo.birthday)
-        binding.etMail.setText(ProfileInfo.email)
-        binding.phoneNumber.text = ProfileInfo.phoneNumber
-        binding.userPhoto.setImageURI(ProfileInfo.selectedImageUri)
+        viewModel.profileData.observe(viewLifecycleOwner) { profile ->
+            profile?.let {
+                binding.name.setText(it.first_name)
+                binding.surname.setText(it.last_name)
+                binding.etUsername.setText(it.username)
+                binding.birthday.setText(it.birthday)
+                binding.etMail.setText(it.email)
+                binding.phoneNumber.text = it.phone_number
+                profile.photo.let { photoUrl ->
+                    Glide.with(this).load(photoUrl).into(binding.userPhoto)
+                }
+            }
+        }
     }
 
     private fun saveData() {
@@ -94,5 +103,4 @@ class EditProfileFragment : Fragment() {
     private fun navigateToPhoneNumberConfirmation() {
         findNavController().navigate(R.id.action_editProfileFragment_to_addNumberFragment)
     }
-
 }

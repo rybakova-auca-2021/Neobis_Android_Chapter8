@@ -6,5 +6,6 @@ data class Profile(
     val first_name: String,
     var last_name: String,
     var birthday: String,
-    var phone_number: String
+    var phone_number: String,
+    var photo: String
 )

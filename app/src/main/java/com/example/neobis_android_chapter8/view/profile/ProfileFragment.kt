@@ -17,7 +17,7 @@ import com.example.neobis_android_chapter8.viewModels.AuthViewModel.ProfileViewM
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private val profileViewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as HomeActivity).show()
-        profileViewModel.getInfo(this)
+        viewModel.getInfo()
         setupNavigation()
         setData()
     }
@@ -51,10 +51,13 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setData() {
-        val username = Utils.username
-        binding.name.text = username
-        ProfileInfo.selectedImageUri?.let { imageUri ->
-            Glide.with(this).load(imageUri).into(binding.userPhoto)
+        viewModel.profileData.observe(viewLifecycleOwner) { profile ->
+            profile?.let {
+                binding.name.setText(it.username)
+                profile.photo.let { photoUrl ->
+                    Glide.with(this).load(photoUrl).into(binding.userPhoto)
+                }
+            }
         }
     }
 }
