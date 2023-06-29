@@ -34,9 +34,9 @@ class NumberRegistrationViewModel : ViewModel() {
         val apiInterface = RetrofitInstance.authApi
 
         val file: File? = photo?.let { LocalStorageProvider.getFile(fragment.requireContext(), it) }
-        val requestBody = file?.asRequestBody("image/*".toMediaTypeOrNull())
+        val requestBody = file?.asRequestBody("photo/*".toMediaTypeOrNull())
         val imagePart = requestBody?.let {
-            MultipartBody.Part.createFormData("image", file.name, it)
+            MultipartBody.Part.createFormData("photo", file.name, it)
         }
 
         val firstNamePart = firstName.toRequestBody("text/plain".toMediaTypeOrNull())
