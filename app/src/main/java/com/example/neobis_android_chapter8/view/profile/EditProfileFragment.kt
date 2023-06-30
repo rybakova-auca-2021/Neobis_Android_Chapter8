@@ -65,7 +65,8 @@ class EditProfileFragment : Fragment() {
                 binding.etMail.setText(it.email)
                 binding.phoneNumber.text = it.phone_number
                 profile.photo.let { photoUrl ->
-                    Glide.with(this).load(photoUrl).into(binding.userPhoto)
+                    val newUrl = "http://16.16.200.195$photoUrl"
+                    Glide.with(this).load(newUrl).into(binding.userPhoto)
                 }
             }
         }

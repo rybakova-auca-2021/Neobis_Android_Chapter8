@@ -55,7 +55,8 @@ class ProfileFragment : Fragment() {
             profile?.let {
                 binding.name.setText(it.username)
                 profile.photo.let { photoUrl ->
-                    Glide.with(this).load(photoUrl).into(binding.userPhoto)
+                    val newUrl = "http://16.16.200.195$photoUrl"
+                    Glide.with(this).load(newUrl).into(binding.userPhoto)
                 }
             }
         }
