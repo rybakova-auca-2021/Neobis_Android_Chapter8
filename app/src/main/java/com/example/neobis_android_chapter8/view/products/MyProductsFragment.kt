@@ -91,7 +91,13 @@ class MyProductsFragment : Fragment() {
                 val changeTextView = dialog.findViewById<TextView>(R.id.changeButton)
                 changeTextView?.setOnClickListener {
                     dialog.dismiss()
-                    findNavController().navigate(R.id.editProductFragment)
+                    val fragment = EditProductFragment().apply {
+                        arguments = Bundle().apply { putParcelable("products", data) }
+                    }
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.hostFragment, fragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
                 val deleteTextView = dialog.findViewById<TextView>(R.id.deleteButton)
                 deleteTextView?.setOnClickListener {

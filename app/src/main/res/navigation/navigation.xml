@@ -140,4 +140,9 @@
         android:name="com.example.neobis_android_chapter8.view.products.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.example.neobis_android_chapter8.view.products.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" />
 </navigation>
