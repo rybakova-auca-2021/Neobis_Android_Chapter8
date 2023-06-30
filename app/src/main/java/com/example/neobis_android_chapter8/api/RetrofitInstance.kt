@@ -50,10 +50,13 @@ class RetrofitInstance {
         }
 
         private fun requiresAuthorization(request: okhttp3.Request): Boolean {
-            return request.url.toString().endsWith("full_register/") || request.url.toString().endsWith("confirm/")
-                    || request.url.toString().endsWith("profile/") || request.url.toString().endsWith("product/")
-                    || request.url.toString().endsWith("product/my/")
-                    || request.url.toString().endsWith("product/{id}/")
+            val path = request.url.encodedPath
+            return path.endsWith("full_register/") ||
+                    path.endsWith("confirm/") ||
+                    path.endsWith("profile/") ||
+                    path.endsWith("product/") ||
+                    path.endsWith("product/my/") ||
+                    path.contains("product/") && request.method == "DELETE"
         }
     }
 }

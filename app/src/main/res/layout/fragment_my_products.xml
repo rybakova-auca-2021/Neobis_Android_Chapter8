@@ -43,15 +43,15 @@
 
     <LinearLayout
         android:id="@+id/container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tb_products"
         app:layout_constraintBottom_toTopOf="@+id/rv_products"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_products" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_products"

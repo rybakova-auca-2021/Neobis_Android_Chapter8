@@ -78,15 +78,20 @@ class MyProductsFragment : Fragment() {
 
         adapter.setOnItemClick(object : RecyclerViewAdapter.ListClickListener<Product> {
             override fun onClick(data: Product, position: Int) {
-                findNavController().navigate(R.id.productDetailFragment)
-                // TODO перенести все данные
+                val fragment = ProductDetailFragment().apply {
+                    arguments = Bundle().apply { putParcelable("products", data) }
+                }
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.hostFragment, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
             override fun onThreeDotsClick(data: Product, position: Int) {
                 val dialog = createBottomSheetDialog()
                 val changeTextView = dialog.findViewById<TextView>(R.id.changeButton)
                 changeTextView?.setOnClickListener {
                     dialog.dismiss()
-                    findNavController().navigate(R.id.addProductFragment)
+                    findNavController().navigate(R.id.editProductFragment)
                 }
                 val deleteTextView = dialog.findViewById<TextView>(R.id.deleteButton)
                 deleteTextView?.setOnClickListener {
@@ -117,6 +122,7 @@ class MyProductsFragment : Fragment() {
             .setView(dialogView)
 
         val dialog = dialogBuilder.create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
 
         deleteButton.setOnClickListener {
@@ -148,8 +154,12 @@ class MyProductsFragment : Fragment() {
 
         val layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.MATCH_PARENT
         )
         binding.container.addView(cardView, layoutParams)
+
+        cardView.postDelayed({
+            binding.container.removeView(cardView)
+        }, 1000)
     }
 }
