@@ -14,7 +14,7 @@ data class Image(
 data class Product(
     val id: Int,
     val user: String,
-    val images: List<Image>,
+    val images: List<String>,
     val title: String,
     val price: String,
     val short_description: String?,

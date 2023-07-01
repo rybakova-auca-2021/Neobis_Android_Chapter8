@@ -1,10 +1,12 @@
 package com.example.neobis_android_chapter8.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.CardBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 
@@ -53,9 +55,15 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
         fun bind(product: Product) {
             with(binding) {
-                Glide.with(image).load(product.images).into(image)
+                if (product.images.isNotEmpty()) {
+                    Glide.with(image)
+                        .load(product.images[0])
+                        .into(image)
+                } else {
+                    Glide.with(image).load(R.drawable.empty).into(image)
+                }
                 title.text = product.title
-                price.text = product.price.toString()
+                price.text = product.price
 
                 binding.threeDots.setOnClickListener {
                     onClickListener?.onThreeDotsClick(product, adapterPosition)
