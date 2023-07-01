@@ -10,4 +10,10 @@ object Utils {
     var phoneNumber = ""
     var selectedImageUri: Uri? = null
     var access_token = ""
+
+    val imageList: MutableList<Uri> = mutableListOf()
+
+    fun addImageUri(uri: Uri) {
+        imageList.add(uri)
+    }
 }

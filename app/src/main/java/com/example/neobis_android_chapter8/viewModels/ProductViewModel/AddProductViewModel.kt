@@ -2,64 +2,70 @@ package com.example.neobis_android_chapter8.viewModels.ProductViewModel
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
-import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.api.RetrofitInstance
-import com.example.neobis_android_chapter8.databinding.FragmentAddProductBinding
-import com.example.neobis_android_chapter8.model.ProductModel.CreateProductRequest
 import com.example.neobis_android_chapter8.model.ProductModel.CreateProductResponse
-import com.example.neobis_android_chapter8.model.ProductModel.Image
-import com.example.neobis_android_chapter8.utils.ProductData
-import com.google.android.material.snackbar.Snackbar
-import okhttp3.MediaType.Companion.toMediaType
+import com.example.neobis_android_chapter8.utils.LocalStorageProvider
+import com.example.neobis_android_chapter8.utils.Utils
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
 class AddProductViewModel : ViewModel() {
+
     fun createProduct(
         fragment: Fragment,
-        binding: FragmentAddProductBinding,
-        images: MutableList<String>,
         title: String,
         price: String,
         shortDesc: String,
-        fullDesc: String
+        fullDesc: String,
+        onSuccess: () -> Unit,
+        onError: () -> Unit
     ) {
-        val imageList = mutableListOf<MultipartBody.Part>()
+        val apiInterface = RetrofitInstance.productApi
+        val images = Utils.imageList
 
-        for (imageUrl in images) {
-            val imageFile = File(imageUrl)
-            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaType())
-            val imagePart = MultipartBody.Part.createFormData("images", imageFile.name, imageRequestBody)
-            imageList.add(imagePart)
+        val imageParts = mutableListOf<MultipartBody.Part>()
+
+        images.forEachIndexed { index, image ->
+            val file: File? = LocalStorageProvider.getFile(fragment.requireContext(), image)
+            val requestBody = file?.asRequestBody("image/*".toMediaTypeOrNull())
+            val imagePart = requestBody?.let {
+                MultipartBody.Part.createFormData("images", file.name, it)
+            }
+            imagePart?.let { imageParts.add(it) }
         }
 
-        val request = CreateProductRequest(imageList, title, price, shortDesc, fullDesc)
-        val apiInterface = RetrofitInstance.productApi
+        val titlePart = title.toRequestBody("text/plain".toMediaTypeOrNull())
+        val pricePart = price.toRequestBody("text/plain".toMediaTypeOrNull())
+        val shortDescPart = shortDesc.toRequestBody("text/plain".toMediaTypeOrNull())
+        val fullDescPart = fullDesc.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val call = apiInterface.productCreate(request)
-        call.enqueue(object : Callback<CreateProductResponse> {
-            override fun onResponse(call: Call<CreateProductResponse>, response: Response<CreateProductResponse>) {
+        apiInterface.productCreate(
+            imageParts,
+            title = titlePart,
+            price = pricePart,
+            shortDesc = shortDescPart,
+            fullDesc = fullDescPart
+        ).enqueue(object : Callback<CreateProductResponse> {
+            override fun onResponse(
+                call: Call<CreateProductResponse>,
+                response: Response<CreateProductResponse>
+            ) {
                 if (response.isSuccessful) {
-                    val productId = response.body()?.id
-                    ProductData.id = productId
-                    fragment.findNavController().navigate(R.id.mainPageFragment)
+                    onSuccess()
                 } else {
-                    showSnackbar(binding, "Произошла ошибка. Попробуйте еще раз")
+                    onError()
                 }
             }
 
             override fun onFailure(call: Call<CreateProductResponse>, t: Throwable) {
-                showSnackbar(binding, "Попробуйте еще раз")
+                onError()
             }
         })
-    }
-
-    private fun showSnackbar(binding: FragmentAddProductBinding, message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 }

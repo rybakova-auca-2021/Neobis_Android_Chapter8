@@ -3,7 +3,6 @@ package com.example.neobis_android_chapter8.view.products
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -16,14 +15,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentAddProductBinding
+import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.AddProductViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class AddProductFragment : Fragment() {
     private lateinit var binding: FragmentAddProductBinding
     private val PICK_IMAGE_REQUEST = 1
 
     private val addProductViewModel: AddProductViewModel by viewModels()
-    private val imageList: MutableList<String> = mutableListOf()
 
     private lateinit var addButton: ImageView
     private lateinit var imageContainer: ViewGroup
@@ -52,7 +52,15 @@ class AddProductFragment : Fragment() {
             val shortDesc = binding.inputShortDesc.text.toString()
             val fullDesc = binding.inputFullDesc.text.toString()
 
-            addProductViewModel.createProduct(this, binding, imageList, title, price, shortDesc, fullDesc)
+            addProductViewModel.createProduct(
+                this,
+                title = title,
+                price = price,
+                shortDesc = shortDesc,
+                fullDesc = fullDesc,
+                onSuccess = { findNavController().navigate(R.id.mainPageFragment) },
+                onError = { showSnackbar(binding, "Произошла ошибка. Попробуйте еще раз") }
+            )
         }
         binding.addProductImg.setOnClickListener {
             openGallery()
@@ -62,7 +70,6 @@ class AddProductFragment : Fragment() {
     private fun callGallery() {
         addButton = binding.addProductImg
         imageContainer = binding.imageContainer
-
         addButton.setOnClickListener {
             openGallery()
         }
@@ -92,21 +99,12 @@ class AddProductFragment : Fragment() {
             imageContainer.addView(imageView)
 
             imageUri?.let {
-                val imagePath = getImagePath(imageUri)
-                imagePath?.let {
-                    imageList.add(it)
-                }
+                Utils.addImageUri(it)
             }
         }
     }
 
-    private fun getImagePath(uri: Uri): String? {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = requireActivity().contentResolver.query(uri, projection, null, null, null)
-        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor?.moveToFirst()
-        val imagePath = columnIndex?.let { cursor.getString(it) }
-        cursor?.close()
-        return imagePath
+    private fun showSnackbar(binding: FragmentAddProductBinding, message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 }

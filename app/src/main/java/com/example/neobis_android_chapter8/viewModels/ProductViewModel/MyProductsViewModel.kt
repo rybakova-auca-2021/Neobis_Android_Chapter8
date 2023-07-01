@@ -1,21 +1,9 @@
 package com.example.neobis_android_chapter8.viewModels.ProductViewModel
 
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.adapter.RecyclerViewAdapter
 import com.example.neobis_android_chapter8.api.RetrofitInstance
-import com.example.neobis_android_chapter8.databinding.FragmentMyProductsBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
-import com.example.neobis_android_chapter8.utils.ProductData
-import com.example.neobis_android_chapter8.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
