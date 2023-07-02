@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.R
+import com.example.neobis_android_chapter8.adapter.ItemPagerAdapter
 import com.example.neobis_android_chapter8.databinding.FragmentProductDetailBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.ReadProductViewModel
@@ -64,6 +67,10 @@ class ProductDetailFragment : Fragment() {
                 binding.price.setText(it.price)
                 binding.shortDescription.setText(it.short_description)
                 binding.description.setText(it.full_description)
+
+                val images = updatedProduct.images
+                val adapter = ItemPagerAdapter(images)
+                binding.viewPager.adapter = adapter
             }
         }
     }

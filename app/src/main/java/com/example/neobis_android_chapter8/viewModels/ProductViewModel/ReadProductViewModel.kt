@@ -3,7 +3,6 @@ package com.example.neobis_android_chapter8.viewModels.ProductViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.neobis_android_chapter8.api.RetrofitInstance
-import com.example.neobis_android_chapter8.model.AuthModel.Profile
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,11 +22,17 @@ class ReadProductViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val product = response.body()
                     productData.value = product!!
+                    fetchProductImages(product.images)
                 }
             }
 
             override fun onFailure(call: Call<Product>, t: Throwable) {
             }
         })
+    }
+    private fun fetchProductImages(imagesUrl: List<String>?) {
+        if (imagesUrl != null) {
+            productData.value?.images = imagesUrl
+        }
     }
 }
