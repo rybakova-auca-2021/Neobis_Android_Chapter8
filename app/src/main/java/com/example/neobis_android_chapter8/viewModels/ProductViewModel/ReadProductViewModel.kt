@@ -11,9 +11,7 @@ import retrofit2.Response
 class ReadProductViewModel : ViewModel() {
     val productData: MutableLiveData<Product> = MutableLiveData()
 
-    fun getProductData(
-        id: Int,
-    ) {
+    fun getProductData(id: Int) {
         val apiInterface = RetrofitInstance.productApi
 
         val call = apiInterface.productRead(id)

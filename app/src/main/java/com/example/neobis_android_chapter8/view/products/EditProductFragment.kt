@@ -1,26 +1,32 @@
 package com.example.neobis_android_chapter8.view.products
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentEditProductBinding
-import com.example.neobis_android_chapter8.databinding.FragmentEditProfileBinding
-import com.example.neobis_android_chapter8.databinding.FragmentProductDetailBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
+import com.example.neobis_android_chapter8.utils.ImageHelper
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.ReadProductViewModel
 
 class EditProductFragment : Fragment() {
     private lateinit var binding: FragmentEditProductBinding
+
     private val editViewModel: EditProductViewModel by viewModels()
     private val infoViewModel: ReadProductViewModel by viewModels()
 
+    private lateinit var addButton: ImageView
+    private lateinit var imageContainer: ViewGroup
     private lateinit var product: Product
 
     override fun onCreateView(
@@ -34,6 +40,7 @@ class EditProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupNavigation()
+        setupPhoto()
         getProductFromArguments()
         getInfo()
     }
@@ -43,16 +50,10 @@ class EditProductFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.btnReady.setOnClickListener {
-            editViewModel.updateProduct(
-                product.id,
-                product,
-                onSuccess = {
-                    Toast.makeText(requireContext(),"Изменения сохранены!",Toast.LENGTH_SHORT).show()
-                },
-                onError = {
-                    Toast.makeText(requireContext(),"Повторите попытку!",Toast.LENGTH_SHORT).show()
-                }
-            )
+            updateProduct()
+        }
+        binding.addProductImg.setOnClickListener {
+            ImageHelper.openGallery(this)
         }
     }
 
@@ -60,6 +61,34 @@ class EditProductFragment : Fragment() {
         arguments?.let {
             product = it.getParcelable("products") ?: throw IllegalArgumentException("Product argument not found")
         }
+    }
+
+    private fun setupPhoto() {
+        addButton = binding.addProductImg
+        imageContainer = binding.imageContainer
+    }
+
+    private fun updateProduct() {
+        val title = binding.inputName.text.toString()
+        val price = binding.inputPrice.text.toString()
+        val shortDesc = binding.inputShortDesc.text.toString()
+        val fullDesc = binding.inputFullDesc.text.toString()
+
+        editViewModel.updateProduct(
+            product.id,
+            this,
+            title = title,
+            price = price,
+            shortDesc = shortDesc,
+            fullDesc = fullDesc,
+            onSuccess = {
+                Toast.makeText(requireContext(),"Изменения сохранены!",Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.myProductsFragment)
+            },
+            onError = {
+                Toast.makeText(requireContext(),"Повторите попытку!",Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     private fun getInfo() {
@@ -70,7 +99,32 @@ class EditProductFragment : Fragment() {
                 binding.inputPrice.text = Editable.Factory.getInstance().newEditable(it.price)
                 binding.inputShortDesc.text = Editable.Factory.getInstance().newEditable(it.short_description)
                 binding.inputFullDesc.text = Editable.Factory.getInstance().newEditable(it.full_description)
+
+                val images = product.images
+                binding.imageContainer.removeAllViews()
+
+                val addProductImageView = binding.addProductImg
+
+                images.forEach { image ->
+                    val imageView = ImageView(requireContext())
+                    val layoutParams = LinearLayout.LayoutParams(
+                        addProductImageView.width,
+                        addProductImageView.height
+                    )
+                    layoutParams.setMargins(6, 0, 6, 0) // Set margin of 6dp
+                    imageView.layoutParams = layoutParams
+                    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    Glide.with(this)
+                        .load(image)
+                        .into(imageView)
+                    imageView.clipToOutline = true
+                    binding.imageContainer.addView(imageView)
+                }
             }
         }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        ImageHelper.handleImageSelection(this, requestCode, resultCode, data, addButton, imageContainer)
     }
 }
