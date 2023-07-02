@@ -1,16 +1,11 @@
 package com.example.neobis_android_chapter8
 
 import android.os.Bundle
-import android.provider.ContactsContract.Profile
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.neobis_android_chapter8.databinding.ActivityHomeBinding
-import com.example.neobis_android_chapter8.view.products.MainPageFragment
-import com.example.neobis_android_chapter8.view.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -29,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_bar_view)
         bottomNavigationView.setupWithNavController(navController)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_item1 -> {
                     navController.navigate(R.id.profileFragment)
@@ -47,14 +42,15 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-    fun hide() {
+
+    fun hideBtmNav() {
         val navBar = findViewById<View>(R.id.nav_bar)
         val floatBtn = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         navBar.visibility = View.GONE
         floatBtn.visibility = View.GONE
     }
 
-    fun show() {
+    fun showBtmNav() {
         val navBar = findViewById<View>(R.id.nav_bar)
         val floatBtn = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         navBar.visibility = View.VISIBLE

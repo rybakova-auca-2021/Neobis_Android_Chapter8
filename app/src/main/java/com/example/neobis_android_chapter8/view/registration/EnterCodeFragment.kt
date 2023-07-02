@@ -27,7 +27,7 @@ class EnterCodeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).show()
+        (requireActivity() as HomeActivity).showBtmNav()
         setupNavigation()
     }
 

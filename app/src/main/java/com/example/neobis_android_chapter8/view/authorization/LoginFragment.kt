@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).hide()
+        (requireActivity() as HomeActivity).hideBtmNav()
         changeButtonColor()
         setupNavigation()
         setupPasswordVisibilityToggle()
@@ -49,9 +49,8 @@ class LoginFragment : Fragment() {
             viewModel.login(username, password,
                 onSuccess = {
                     findNavController().navigate(R.id.action_login_to_profileFragment)
-                    Utils.username = username
                 },
-                onError = { errorMessage ->
+                onError = {
                     showErrorDialog()
                     clearFields()
                 }

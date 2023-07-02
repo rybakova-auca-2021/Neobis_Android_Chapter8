@@ -21,13 +21,7 @@ class MyProductsViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         val productList = response.body()
-                        productList?.let {
-                            if(it.isNotEmpty()) {
-                                onSuccess.invoke(it)
-                            } else {
-                                onSuccess.invoke(emptyList())
-                            }
-                        }
+                        onSuccess.invoke(productList ?: emptyList())
                     } else {
                         onError.invoke()
                     }

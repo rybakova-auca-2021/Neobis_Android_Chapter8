@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.adapter.RecyclerViewAdapter
+import com.example.neobis_android_chapter8.adapter.ProductListAdapter
 import com.example.neobis_android_chapter8.databinding.FragmentLikedProductsBinding
 
 class LikedProductsFragment : Fragment() {
@@ -27,7 +26,7 @@ class LikedProductsFragment : Fragment() {
     }
 
     private fun setupRV() {
-        val adapter = RecyclerViewAdapter()
+        val adapter = ProductListAdapter()
         val recyclerView = binding.rvLikedProducts
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)

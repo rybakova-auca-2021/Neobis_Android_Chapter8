@@ -11,8 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.FragmentProfileBinding
-import com.example.neobis_android_chapter8.utils.ProfileInfo
-import com.example.neobis_android_chapter8.utils.Utils
 import com.example.neobis_android_chapter8.viewModels.AuthViewModel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
@@ -29,7 +27,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).show()
+        (requireActivity() as HomeActivity).showBtmNav()
         viewModel.getInfo()
         setupNavigation()
         setData()
@@ -53,7 +51,7 @@ class ProfileFragment : Fragment() {
     private fun setData() {
         viewModel.profileData.observe(viewLifecycleOwner) { profile ->
             profile?.let {
-                binding.name.setText(it.username)
+                binding.name.text = it.username
                 profile.photo.let { photoUrl ->
                     val newUrl = "http://16.16.200.195$photoUrl"
                     Glide.with(this).load(newUrl).into(binding.userPhoto)

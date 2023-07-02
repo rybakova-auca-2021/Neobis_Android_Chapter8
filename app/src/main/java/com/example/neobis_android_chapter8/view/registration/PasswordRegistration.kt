@@ -31,7 +31,7 @@ class PasswordRegistration : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).show()
+        (requireActivity() as HomeActivity).showBtmNav()
         setupNavigation()
         setupClickListeners()
         setupPasswordValidation()
@@ -55,7 +55,7 @@ class PasswordRegistration : Fragment() {
     private fun setupRegistration() {
         val password = binding.createPasswordEt.text?.toString() ?: ""
         val passwordRepeat = binding.repeatPasswordEt.text?.toString() ?: ""
-        if (password.isNotEmpty() && passwordRepeat.isNotEmpty()) {
+        if (password.isNotEmpty() && passwordRepeat.isNotEmpty() && password == passwordRepeat) {
             viewModel.register(password, passwordRepeat,
                 onSuccess = {
                     findNavController().navigate(R.id.action_passwordRegistration_to_profileFragment)
@@ -71,19 +71,17 @@ class PasswordRegistration : Fragment() {
     private fun setupPasswordValidation() {
         binding.createPasswordEt.addTextChangedListener {
             val password = it.toString()
-            var isPasswordMatch = false
+            val passwordRepeat = binding.repeatPasswordEt.text.toString()
 
             val hasUpperCase = password.matches(".*[A-Z].*".toRegex())
             val hasNumber = password.matches(".*\\d.*".toRegex())
             val hasSpecialSymbol = password.matches(".*[!@#$%^&*(),.?\":{}|<>].*".toRegex())
-            if (password == binding.repeatPasswordEt.text.toString()) {
-                isPasswordMatch = true
-            }
-
-            val isValid = hasUpperCase && hasNumber && hasSpecialSymbol && isPasswordMatch
-            if (isValid) {
-                binding.buttonNext.isEnabled = true
-                binding.buttonNext.setBackgroundResource(R.color.btn_valid)
+            if (password == passwordRepeat) {
+                val isValid = hasUpperCase && hasNumber && hasSpecialSymbol
+                if (isValid) {
+                    binding.buttonNext.isEnabled = true
+                    binding.buttonNext.setBackgroundResource(R.color.btn_valid)
+                }
             }
         }
 

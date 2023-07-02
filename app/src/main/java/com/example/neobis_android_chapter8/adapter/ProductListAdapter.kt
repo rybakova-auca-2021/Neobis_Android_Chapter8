@@ -1,6 +1,5 @@
 package com.example.neobis_android_chapter8.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,7 @@ import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.databinding.CardBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     private var products = emptyList<Product>()
     var onClickListener: ListClickListener<Product>? = null

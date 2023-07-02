@@ -10,14 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.adapter.RecyclerViewAdapter
+import com.example.neobis_android_chapter8.adapter.ProductListAdapter
 import com.example.neobis_android_chapter8.databinding.FragmentMainPageBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.MainPageViewModel
 
 class MainPageFragment : Fragment() {
     private lateinit var binding: FragmentMainPageBinding
-    private lateinit var adapter: RecyclerViewAdapter
+    private lateinit var adapter: ProductListAdapter
     private val mainPageViewModel: MainPageViewModel by viewModels()
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class MainPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).show()
+        (requireActivity() as HomeActivity).showBtmNav()
         setupRV()
         mainPageViewModel.fetchProductList(
             onSuccess = {adapter.updateProduct(it)},
@@ -39,13 +39,13 @@ class MainPageFragment : Fragment() {
     }
 
     private fun setupRV() {
-        adapter = RecyclerViewAdapter()
+        adapter = ProductListAdapter()
         val recyclerView = binding.rvProducts
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        adapter.setOnItemClick(object : RecyclerViewAdapter.ListClickListener<Product> {
+        adapter.setOnItemClick(object : ProductListAdapter.ListClickListener<Product> {
             override fun onClick(data: Product, position: Int) {
                 val fragment = ProductDetailFragment().apply {
                     arguments = Bundle().apply { putParcelable("products", data) }
@@ -57,7 +57,6 @@ class MainPageFragment : Fragment() {
             }
 
             override fun onThreeDotsClick(data: Product, position: Int) {
-                TODO("Not yet implemented")
             }
         })
     }

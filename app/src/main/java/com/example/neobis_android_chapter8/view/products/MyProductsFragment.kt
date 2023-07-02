@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.neobis_android_chapter8.HomeActivity
 import com.example.neobis_android_chapter8.R
-import com.example.neobis_android_chapter8.adapter.RecyclerViewAdapter
+import com.example.neobis_android_chapter8.adapter.ProductListAdapter
 import com.example.neobis_android_chapter8.databinding.FragmentMyProductsBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.MyProductsViewModel
@@ -24,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MyProductsFragment : Fragment() {
     private lateinit var binding: FragmentMyProductsBinding
-    private lateinit var adapter: RecyclerViewAdapter
+    private lateinit var adapter: ProductListAdapter
     private val myProductsViewModel: MyProductsViewModel by viewModels()
 
     override fun onCreateView(
@@ -37,7 +37,7 @@ class MyProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).hide()
+        (requireActivity() as HomeActivity).hideBtmNav()
         setupNavigation()
         setupRV()
         showProductList()
@@ -53,30 +53,25 @@ class MyProductsFragment : Fragment() {
         myProductsViewModel.fetchProductList(
             onSuccess = { productList ->
                 adapter.updateProduct(productList)
-                if (productList.isEmpty()) {
-                    binding.boxImg.isVisible = true
-                    binding.msg.isVisible = true
-                } else {
-                    binding.boxImg.isVisible = false
-                    binding.msg.isVisible = false
-                }
+                binding.boxImg.isVisible = productList.isEmpty()
+                binding.msg.isVisible = productList.isEmpty()
                 binding.progressBar.visibility = View.GONE
             },
             onError = {
-                Toast.makeText(requireContext(), "Только зарегистрированный пользоатель имеет доступ к товарам", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             }
         )
     }
 
     private fun setupRV() {
-        adapter = RecyclerViewAdapter()
+        adapter = ProductListAdapter()
         val recyclerView = binding.rvProducts
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        adapter.setOnItemClick(object : RecyclerViewAdapter.ListClickListener<Product> {
+        adapter.setOnItemClick(object : ProductListAdapter.ListClickListener<Product> {
             override fun onClick(data: Product, position: Int) {
                 val fragment = ProductDetailFragment().apply {
                     arguments = Bundle().apply { putParcelable("products", data) }
@@ -139,7 +134,7 @@ class MyProductsFragment : Fragment() {
                     dialog.dismiss()
                 },
                 onError = {
-                    Toast.makeText(requireContext(), "Не удалось удалить товар", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.error_delete), Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 },
                 productId = data.id

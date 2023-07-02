@@ -63,10 +63,10 @@ class ProductDetailFragment : Fragment() {
         viewModel.getProductData(id)
         viewModel.productData.observe(viewLifecycleOwner) { updatedProduct ->
             updatedProduct?.let {
-                binding.title.setText(it.title)
-                binding.price.setText(it.price)
-                binding.shortDescription.setText(it.short_description)
-                binding.description.setText(it.full_description)
+                binding.title.text = it.title
+                binding.price.text = it.price
+                binding.shortDescription.text = it.short_description
+                binding.description.text = it.full_description
 
                 val images = updatedProduct.images
                 val adapter = ItemPagerAdapter(images)

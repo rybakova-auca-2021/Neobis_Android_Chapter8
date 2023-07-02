@@ -61,13 +61,13 @@ class AddProductFragment : Fragment() {
         val fullDesc = binding.inputFullDesc.text.toString()
 
         addProductViewModel.createProduct(
-            this,
+            requireContext(),
             title = title,
             price = price,
             shortDesc = shortDesc,
             fullDesc = fullDesc,
             onSuccess = { findNavController().navigate(R.id.mainPageFragment) },
-            onError = { showSnackbar(binding, "Произошла ошибка. Попробуйте еще раз") }
+            onError = { showSnackbar(binding, getString(R.string.error_msg)) }
         )
     }
 

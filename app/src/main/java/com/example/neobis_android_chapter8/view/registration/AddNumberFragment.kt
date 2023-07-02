@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +31,7 @@ class AddNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).hide()
+        (requireActivity() as HomeActivity).hideBtmNav()
         setupNavigation()
         setupMask()
     }
@@ -43,7 +45,26 @@ class AddNumberFragment : Fragment() {
         binding.buttonNext.setOnClickListener {
             val phoneNumber = binding.etPhone.text.toString()
             saveData(phoneNumber)
-            fullRegisterViewModel.fullRegister(this, binding, Utils.name, Utils.surname, Utils.birthday, phoneNumber)
+            fullRegisterViewModel.fullRegister(
+                requireContext(),
+                Utils.name,
+                Utils.surname,
+                Utils.birthday,
+                phoneNumber,
+                onSuccess = {
+                    Toast.makeText(
+                        requireContext(),
+                        "Код отправлен на ваш номер телефона",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().navigate(R.id.action_addNumberFragment_to_enterCodeFragment)
+                },
+                onError = {
+                    binding.errorMsg.isVisible = true
+                    clearFields()
+                }
+            )
+
         }
         binding.buttonBack.setOnClickListener {
             findNavController().navigate(R.id.action_addNumberFragment_to_editProfileFragment)
@@ -52,5 +73,9 @@ class AddNumberFragment : Fragment() {
 
     private fun saveData(phoneNumber: String) {
         Utils.phoneNumber = phoneNumber
+    }
+
+    private fun clearFields() {
+        binding.etPhone.text = null
     }
 }

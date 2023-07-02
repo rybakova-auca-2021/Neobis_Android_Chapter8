@@ -38,4 +38,11 @@
     <string name="title_productDetail">Title</string>
     <string name="description">Description</string>
     <string name="detail_description">Детальное описание</string>
+    <string name="error_delete">Не удалось удалить товар</string>
+    <string name="auth_error">Только зарегистрированный пользователь имеет доступ к товарам</string>
+    <string name="error_msg">Произошла ошибка. Попробуйте еще раз</string>
+    <string name="changesSaved">Изменения сохранены!</string>
+    <string name="tryAgain">Повторите попытку!</string>
+    <string name="authIsTrue">Подтверждение прошло успешно</string>
+    <string name="codeIsNotCorrect">Неверный код. Попробуйте еще раз</string>
 </resources>

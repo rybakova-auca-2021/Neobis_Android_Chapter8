@@ -1,6 +1,6 @@
 package com.example.neobis_android_chapter8.view.products
 
-import androidx.fragment.app.Fragment
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.model.ProductModel.Product
@@ -19,7 +19,7 @@ class EditProductViewModel : ViewModel() {
 
     fun updateProduct(
         id: Int,
-        fragment: Fragment,
+        context: Context,
         title: String,
         price: String,
         shortDesc: String,
@@ -32,8 +32,8 @@ class EditProductViewModel : ViewModel() {
 
         val imageParts = mutableListOf<MultipartBody.Part>()
 
-        images.forEachIndexed { index, image ->
-            val file: File? = LocalStorageProvider.getFile(fragment.requireContext(), image)
+        images.forEachIndexed { _, image ->
+            val file: File? = LocalStorageProvider.getFile(context, image)
             val requestBody = file?.asRequestBody("image/*".toMediaTypeOrNull())
             val imagePart = requestBody?.let {
                 MultipartBody.Part.createFormData("images", file.name, it)

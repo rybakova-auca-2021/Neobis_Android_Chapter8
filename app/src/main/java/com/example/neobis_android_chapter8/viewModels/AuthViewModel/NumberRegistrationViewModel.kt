@@ -1,5 +1,6 @@
 package com.example.neobis_android_chapter8.viewModels.AuthViewModel
 
+import android.content.Context
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -23,17 +24,18 @@ import java.io.File
 class NumberRegistrationViewModel : ViewModel() {
 
     fun fullRegister(
-        fragment: Fragment,
-        binding: FragmentAddNumberBinding,
+        context: Context,
         firstName: String,
         lastName: String,
         birthday: String,
-        phoneNumber: String
+        phoneNumber: String,
+        onSuccess: () -> Unit,
+        onError: () -> Unit
     ) {
         val photo = Utils.selectedImageUri
         val apiInterface = RetrofitInstance.authApi
 
-        val file: File? = photo?.let { LocalStorageProvider.getFile(fragment.requireContext(), it) }
+        val file: File? = photo?.let { LocalStorageProvider.getFile(context, it) }
         val requestBody = file?.asRequestBody("photo/*".toMediaTypeOrNull())
         val imagePart = requestBody?.let {
             MultipartBody.Part.createFormData("photo", file.name, it)
@@ -58,26 +60,15 @@ class NumberRegistrationViewModel : ViewModel() {
                 response: Response<RegisterResponseModel>
             ) {
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        fragment.requireContext(),
-                        "Код отправлен на ваш номер телефона",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    fragment.findNavController()
-                        .navigate(R.id.action_addNumberFragment_to_enterCodeFragment)
+                    onSuccess.invoke()
                 } else {
-                    binding.errorMsg.isVisible = true
-                    clearFields(binding)
+                    onError.invoke()
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponseModel>, t: Throwable) {
-                Toast.makeText(fragment.requireContext(), "Повторите попытку", Toast.LENGTH_SHORT)
-                    .show()
+                onError.invoke()
             }
         })
-    }
-    private fun clearFields(binding: FragmentAddNumberBinding) {
-        binding.etPhone.text = null
     }
 }

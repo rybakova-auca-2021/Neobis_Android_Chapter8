@@ -33,7 +33,7 @@ class EditProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as HomeActivity).hide()
+        (requireActivity() as HomeActivity).hideBtmNav()
         setupNavigation()
         setProfileInfo()
         viewModel.getInfo()
@@ -93,7 +93,6 @@ class EditProfileFragment : Fragment() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             selectedImageUri = data.data
             Utils.selectedImageUri = selectedImageUri
-            println(Utils.selectedImageUri)
             Glide.with(this).load(selectedImageUri).into(binding.userPhoto)
         }
     }

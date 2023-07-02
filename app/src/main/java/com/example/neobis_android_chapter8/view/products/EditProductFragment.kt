@@ -76,17 +76,17 @@ class EditProductFragment : Fragment() {
 
         editViewModel.updateProduct(
             product.id,
-            this,
+            requireContext(),
             title = title,
             price = price,
             shortDesc = shortDesc,
             fullDesc = fullDesc,
             onSuccess = {
-                Toast.makeText(requireContext(),"Изменения сохранены!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.changesSaved),Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.myProductsFragment)
             },
             onError = {
-                Toast.makeText(requireContext(),"Повторите попытку!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.tryAgain),Toast.LENGTH_SHORT).show()
             }
         )
     }

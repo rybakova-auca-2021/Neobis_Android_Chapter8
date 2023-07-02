@@ -1,9 +1,6 @@
 package com.example.neobis_android_chapter8.viewModels.ProductViewModel
 
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.example.neobis_android_chapter8.adapter.RecyclerViewAdapter
 import com.example.neobis_android_chapter8.api.RetrofitInstance
 import com.example.neobis_android_chapter8.model.ProductModel.Product
 import retrofit2.Call
