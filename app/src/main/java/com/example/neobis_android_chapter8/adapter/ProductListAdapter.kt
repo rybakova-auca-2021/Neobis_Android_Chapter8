@@ -49,12 +49,12 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
         }
     }
 
-    inner class ViewHolder(private val binding: CardBinding) :
+    inner class ViewHolder(val binding: CardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             with(binding) {
-                if (product.images.isNotEmpty()) {
+                if (product.images != null && product.images.isNotEmpty()) {
                     Glide.with(image)
                         .load(product.images[0])
                         .into(image)
@@ -67,6 +67,9 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
                 binding.threeDots.setOnClickListener {
                     onClickListener?.onThreeDotsClick(product, adapterPosition)
                 }
+                binding.likeBtn.setOnClickListener {
+                    onClickListener?.onLikeClick(product, adapterPosition)
+                }
             }
         }
     }
@@ -74,6 +77,7 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
     interface ListClickListener<T> {
         fun onClick(data: T, position: Int)
         fun onThreeDotsClick(data: T, position: Int)
+        fun onLikeClick(data: T, position: Int)
     }
 
     class ProductDiffCallback(

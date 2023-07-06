@@ -40,4 +40,10 @@ interface ProductInterface {
 
     @DELETE("product/{id}/")
     fun productDelete(@Path("id") id: Int): Call<Unit>
+
+    @POST("product/{id}/like/")
+    fun likeProduct(@Path("id") id: Int): Call<Unit>
+
+    @GET("product/fans/")
+    fun getFavoriteItems(): Call<List<Product>>
 }

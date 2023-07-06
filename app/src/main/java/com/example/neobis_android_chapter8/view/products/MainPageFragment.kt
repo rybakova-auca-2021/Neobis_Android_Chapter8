@@ -13,12 +13,14 @@ import com.example.neobis_android_chapter8.R
 import com.example.neobis_android_chapter8.adapter.ProductListAdapter
 import com.example.neobis_android_chapter8.databinding.FragmentMainPageBinding
 import com.example.neobis_android_chapter8.model.ProductModel.Product
+import com.example.neobis_android_chapter8.viewModels.ProductViewModel.LikeProductViewModel
 import com.example.neobis_android_chapter8.viewModels.ProductViewModel.MainPageViewModel
 
 class MainPageFragment : Fragment() {
     private lateinit var binding: FragmentMainPageBinding
     private lateinit var adapter: ProductListAdapter
     private val mainPageViewModel: MainPageViewModel by viewModels()
+    private val likeProductViewModel: LikeProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +59,18 @@ class MainPageFragment : Fragment() {
             }
 
             override fun onThreeDotsClick(data: Product, position: Int) {
+            }
+
+            override fun onLikeClick(data: Product, position: Int) {
+                likeProductViewModel.likeProduct(
+                    onSuccess = {
+                        Toast.makeText(requireContext(), "Product added to favorites", Toast.LENGTH_SHORT).show()
+                    },
+                    onError = {
+                        Toast.makeText(requireContext(), "Please try again", Toast.LENGTH_SHORT).show()
+                    },
+                    productId = data.id
+                )
             }
         })
     }

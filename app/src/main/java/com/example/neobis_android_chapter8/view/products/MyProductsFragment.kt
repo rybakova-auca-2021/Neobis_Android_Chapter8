@@ -102,6 +102,9 @@ class MyProductsFragment : Fragment() {
                 dialog.show()
             }
 
+            override fun onLikeClick(data: Product, position: Int) {
+                TODO("Not yet implemented")
+            }
         })
     }
 

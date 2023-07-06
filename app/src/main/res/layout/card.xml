@@ -63,38 +63,36 @@
             android:id="@+id/likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="52dp"
             android:text="100"
             android:textColor="#C1C1C1"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintBottom_toBottomOf="@+id/likeBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price"
+            app:layout_constraintTop_toTopOf="@+id/likeBtn"
             tools:ignore="NotSibling" />
 
         <ImageView
             android:id="@+id/threeDots"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="5dp"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/likes"
+            app:layout_constraintBottom_toBottomOf="@+id/likeBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/likes"
+            app:layout_constraintTop_toTopOf="@+id/likeBtn"
             app:srcCompat="@drawable/dots_three_vertical"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/likeBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toStartOf="@+id/likes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/price"
-            app:srcCompat="@drawable/heart" />
+            app:srcCompat="@drawable/greyheart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

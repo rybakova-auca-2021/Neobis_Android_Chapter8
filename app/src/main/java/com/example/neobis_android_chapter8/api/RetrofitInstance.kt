@@ -61,7 +61,8 @@ class RetrofitInstance {
                     path.endsWith("product/") ||
                     path.endsWith("product/my/") ||
                     path.contains("product/") && request.method == "DELETE" ||
-                    path.contains("product/") && request.method == "PUT"
+                    path.contains("product/") && request.method == "PUT" ||
+                    path.contains("like/") || path.contains("fans/")
         }
     }
 }
