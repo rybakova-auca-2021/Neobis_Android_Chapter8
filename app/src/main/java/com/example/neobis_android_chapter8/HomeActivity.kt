@@ -24,14 +24,15 @@ class HomeActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_bar_view)
         bottomNavigationView.setupWithNavController(navController)
 
+        val floatingActionButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        floatingActionButton.setOnClickListener {
+            navController.navigate(R.id.addProductFragment)
+        }
+
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_item1 -> {
                     navController.navigate(R.id.profileFragment)
-                    true
-                }
-                R.id.menu_item3 -> {
-                    navController.navigate(R.id.addProductFragment)
                     true
                 }
                 R.id.menu_item5 -> {
