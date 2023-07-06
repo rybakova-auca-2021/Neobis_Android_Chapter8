@@ -52,9 +52,11 @@ class ProfileFragment : Fragment() {
         viewModel.profileData.observe(viewLifecycleOwner) { profile ->
             profile?.let {
                 binding.name.text = it.username
-                profile.photo.let { photoUrl ->
-                    val newUrl = "http://16.16.200.195$photoUrl"
-                    Glide.with(this).load(newUrl).into(binding.userPhoto)
+                if (it.photo.isNullOrEmpty()) {
+                    Glide.with(this).load(R.drawable.user_photo).into(binding.userPhoto)
+                } else {
+                    val photoUrl = "http://16.16.200.195${it.photo}"
+                    Glide.with(this).load(photoUrl).circleCrop().into(binding.userPhoto)
                 }
             }
         }
